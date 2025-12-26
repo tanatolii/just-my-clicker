@@ -1,0 +1,61 @@
+﻿{
+    "dialogue": [
+        {
+            "id": 0,
+            "text": "that dialogue was made just for testing some stuff1",
+            "nextId": 0
+        },
+        {
+            "id": 1,
+            "text": ". . .",
+            "character": "tanatolii",
+            "face": "Tap",
+            "skip": true,
+            "nextId": 2
+        },
+        {
+            "id": 2,
+            "text": "",
+            "character": "tanatolii",
+            "face": "Sleep",
+            "nextId": 3
+        },
+        {
+            "id": 3,
+            "text": ". . .",
+            "character": "tanatolii",
+            "face": "Tap",
+            "skip": true,
+            "nextId": 4
+        },
+        {
+            "id": 4,
+            "text": "",
+            "character": "tanatolii",
+            "face": "Sleep",
+            "nextId": 5
+        },
+        {
+            "id": 5,
+            "text": "Да боже...",
+            "character": "tanatolii",
+            "face": "Tap",
+            "nextId": 6
+        },
+        {
+            "id": 6,
+            "text": "Какого хре",
+            "character": "tanatolii",
+            "face": "Tap",
+            "skip":  true,
+            "nextId": 7
+        },
+        {
+            "id": 7,
+            "text": "Оу",
+            "character": "tanatolii",
+            "face": "Surprised",
+            "nextId": 0
+        }
+    ]
+}

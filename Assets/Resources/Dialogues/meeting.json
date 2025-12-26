@@ -1,0 +1,49 @@
+﻿{
+    "dialogue": [
+        {
+            "id": 0,
+            "text": "that dialogue was made just for testing some stuff0",
+            "nextId": 0
+        },
+        {
+            "id": 1,
+            "text": "Hello",
+            "choices": [
+                {
+                    "text": "Hello",
+                    "nextId": 2
+                },
+                {
+                    "text": "fuck you",
+                    "nextId": 3
+                },
+                {
+                    "text": "Buy",
+                    "nextId": 5,
+                    "money": -10
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "text": "Nice to meet you!",
+            "nextId": 0
+        },
+        {
+            "id": 3,
+            "text": "OH, fuck YOU",
+            "nextId": 4
+        },
+        {
+            "id": 4,
+            "text": "SHIT",
+            "nextId": 0
+        },
+        {
+            "id": 5,
+            "text": "OK",
+            "money": -10,
+            "nextId": 0
+        } 
+    ]
+}
