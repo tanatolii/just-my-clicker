@@ -5,48 +5,49 @@ using UnityEngine.UI;
 
 public class ButtonI : Item
 {
+    [Header("Refs")]
+    [SerializeField] private Wallet wallet;
+    [SerializeField] private ClickI click;
+    [SerializeField] private Image buttonImage;
+
     public Sprite PressedUp;
     public Sprite PressedDown;
     public UnityEvent ButtonPressed;
     public GameObject ObjectOnScene;
     public float Delay;
     public bool IsPressed;
-    Wallet w;
-    ClickI c;
     private int[] costs = new int[] { 50, 100, 175, 250, 375, 600, 1000, 2500, 5000, 10000 };
     void Start()
     {
         ItemList itemList = transform.parent.GetComponent<ItemList>();
-        w = itemList.GetItem(4) as Wallet;
-        c = itemList.GetItem(1) as ClickI;
     }
     public void Press()
     {
-        if (!IsPressed)
-        {
-            ButtonPressed?.Invoke();
-            w.ScoreChange(c.Power);
-            StartCoroutine(wait());
-        }
+        if (IsPressed) return;
+
+        ButtonPressed?.Invoke();
+        wallet.ScoreChange(click.Power);
+        StartCoroutine(WaitPressAnim());
     }
-    private IEnumerator wait()
+    private IEnumerator WaitPressAnim()
     {
-        ObjectOnScene.GetComponent<Image>().sprite = PressedDown;
+        buttonImage.sprite = PressedDown;
         IsPressed = true;
         yield return new WaitForSeconds(Delay);
-        ObjectOnScene.GetComponent<Image>().sprite = PressedUp;
+        buttonImage.sprite = PressedUp;
         IsPressed = false;
     }
-    public override void Buy(Wallet wallet)
+    public override bool TryBuy(Wallet wallet)
     {
-        if (level != 10)
-        {
-            base.Buy(wallet);
-            levelUP();
-            bonus = Delay;
-        }
+        if (level >= 10) return false;
+        if (!base.TryBuy(wallet)) return false;
+
+        LevelUp();
+        bonus = Delay;
+        return true;
     }
-    private void levelUP()
+
+    private void LevelUp()
     {
         Delay = 0.9f - 0.08f * level;
         cost = costs[level - 1];

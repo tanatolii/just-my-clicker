@@ -13,15 +13,16 @@ public class Item : MonoBehaviour
     public float bonus = 0;
     public UnityEvent EventAfterBuy;
 
-    public virtual void Buy(Wallet wallet)
+    public virtual bool TryBuy(Wallet wallet)
     {
-        if (wallet.Score >= cost)
-        {
-            level += 1;
-            wallet.ScoreChange(-cost);
-            EventAfterBuy?.Invoke();
-        }
+        if (wallet.Score < cost) return false;
+
+        level += 1;
+        wallet.ScoreChange(-cost);
+        EventAfterBuy?.Invoke();
+        return true;
     }
+
     public virtual void Do()
     {
 

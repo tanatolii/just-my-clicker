@@ -4,21 +4,19 @@ using UnityEngine;
 public class ClickI : Item
 {
     public float Power;
-    public override void Buy(Wallet wallet)
+    public override bool TryBuy(Wallet wallet)
     {
-        if (level != 100)
-        {
-            base.Buy(wallet);
-            if (wallet.Score >= cost) levelUP();
-        }
+        if (level >= 100) return false;
+        if (!base.TryBuy(wallet)) return false;
+
+        LevelUp();
         bonus = Power;
+        return true;
     }
-    private void levelUP()
+
+    private void LevelUp()
     {
-        if (level <= 100)
-        {
-            Power = 1 + 0.1f * (float) Math.Pow(1.45923f, level - 1);
-            cost += 10 * level;
-        }
+        Power = 1 + 0.1f * (float)Math.Pow(1.45923f, level - 1);
+        cost += 10 * level; // цена следующего уровня
     }
 }

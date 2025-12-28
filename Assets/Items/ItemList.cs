@@ -6,12 +6,11 @@ public class ItemList : MonoBehaviour
 {
     [SerializeField] private List<Item> items = new List<Item>();
 
-    public Item GetItem(int id)
+    public Item GetByIndex(int index)
     {
-        return items.Find(i => i.id == id);
+        if (index < 0 || index >= items.Count) return null;
+        return items[index];
     }
-    public int GetLength()
-    {
-        return items.Count();
-    }
+
+    public int Count => items.Count;
 }
