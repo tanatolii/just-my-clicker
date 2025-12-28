@@ -18,41 +18,35 @@ public class NoteBookController : MonoBehaviour
     void Start()
     {
         itemList = claster.itemList;
-        page1.UpdateItem(itemList.GetItem(1));
-        page2.UpdateItem(itemList.GetItem(2));
-        leftPageNumber.text = (pageNumber * 2 - 1).ToString();
-        rightPageNumber.text = (pageNumber * 2).ToString();
+        Refresh();
     }
     public void PageUp()
     {
-        if (itemList.GetLength() > pageNumber * 2)
-        {
-            pageNumber += 1;
-            page1.UpdateItem(itemList.GetItem(pageNumber * 2 - 1));
-            leftArrow.interactable = true;
-            if (itemList.GetLength() > pageNumber * 2)
-            {
-                page2.UpdateItem(itemList.GetItem(pageNumber * 2));
-            }
-            else
-            {
-                page2.ItemHide();
-                rightArrow.interactable = false;
-            }
-            leftPageNumber.text = (pageNumber * 2 - 1).ToString();
-            rightPageNumber.text = (pageNumber * 2).ToString();
-        }
+        pageNumber++;
+        Refresh();
     }
     public void PageDown()
     {
         pageNumber--;
-        page1.UpdateItem(itemList.GetItem(pageNumber * 2 - 1));
-        page2.UpdateItem(itemList.GetItem(pageNumber * 2));
-        leftPageNumber.text = (pageNumber * 2 - 1).ToString();
-        rightPageNumber.text = (pageNumber * 2).ToString();
-        page2.ItemShow();
-        rightArrow.interactable = true;
-        if (pageNumber == 1) leftArrow.interactable = false;
+        Refresh();
+    }
+    private void Refresh()
+    {
+        int leftIndex = (pageNumber - 1) * 2;
+
+        var leftItem = itemList.GetByIndex(leftIndex);
+        if (leftItem != null) { page1.ItemShow(); page1.UpdateItem(leftItem); }
+        else { page1.ItemHide(); }
+
+        var rightItem = itemList.GetByIndex(leftIndex + 1);
+        if (rightItem != null) { page2.ItemShow(); page2.UpdateItem(rightItem); }
+        else { page2.ItemHide(); }
+
+        leftArrow.interactable = pageNumber > 1;
+        rightArrow.interactable = itemList.Count > leftIndex + 2;
+
+        leftPageNumber.text = (leftIndex + 1).ToString();
+        rightPageNumber.text = (leftIndex + 2).ToString();
     }
 
 
@@ -65,10 +59,10 @@ public class NoteBookController : MonoBehaviour
 
         public void UpdateItem(Item item)
         {
+            if (item == null) { ItemHide(); return; }
             TitleArea.text = item.itemName;
             DescriptionArea.text = item.description;
             ItemImage.sprite = item.sprite;
-
             ID = item.id;
         }
         public void ItemHide()
