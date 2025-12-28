@@ -13,14 +13,9 @@ public class ButtonI : Item
     public Sprite PressedUp;
     public Sprite PressedDown;
     public UnityEvent ButtonPressed;
-    public GameObject ObjectOnScene;
     public float Delay;
     public bool IsPressed;
     private int[] costs = new int[] { 50, 100, 175, 250, 375, 600, 1000, 2500, 5000, 10000 };
-    void Start()
-    {
-        ItemList itemList = transform.parent.GetComponent<ItemList>();
-    }
     public void Press()
     {
         if (IsPressed) return;
