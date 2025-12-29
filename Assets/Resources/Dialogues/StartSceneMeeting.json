@@ -7,15 +7,15 @@
         },
         {
             "id": 1,
-            "text": ". . .",
+            "text": "Первая линия",
             "character": "tanatolii",
             "face": "Tap",
-            "skip": true,
+            "skip": false,
             "nextId": 2
         },
         {
             "id": 2,
-            "text": "",
+            "text": "Вторая линия",
             "character": "tanatolii",
             "face": "Sleep",
             "nextId": 3
@@ -25,12 +25,12 @@
             "text": ". . .",
             "character": "tanatolii",
             "face": "Tap",
-            "skip": true,
+            "skip": false,
             "nextId": 4
         },
         {
             "id": 4,
-            "text": "",
+            "text": "а",
             "character": "tanatolii",
             "face": "Sleep",
             "nextId": 5
@@ -47,7 +47,7 @@
             "text": "Какого хре",
             "character": "tanatolii",
             "face": "Tap",
-            "skip":  true,
+            "skip":  false,
             "nextId": 7
         },
         {
